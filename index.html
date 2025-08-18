@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>历史研究导航</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>历史研究导航</h1>
+        <p>为历史研究者提供优质资源链接</p>
+        <input type="text" id="searchInput" placeholder="搜索资源..." onkeyup="searchLinks()">
+    </header>
+    <main>
+        <section class="category">
+            <h2>档案馆</h2>
+            <ul class="link-list" data-category="archives">
+                <li><a href="https://www.archives.gov" target="_blank">美国国家档案馆</a></li>
+                <li><a href="https://www.nationalarchives.gov.uk" target="_blank">英国国家档案馆</a></li>
+                <li><a href="http://www.archives.gov.cn" target="_blank">中国国家档案局</a></li>
+            </ul>
+        </section>
+        <section class="category">
+            <h2>学术数据库</h2>
+            <ul class="link-list" data-category="databases">
+                <li><a href="https://www.jstor.org" target="_blank">JSTOR</a></li>
+                <li><a href="https://scholar.google.com" target="_blank">Google Scholar</a></li>
+                <li><a href="https://www.cnki.net" target="_blank">中国知网</a></li>
+            </ul>
+        </section>
+        <section class="category">
+            <h2>历史地图</h2>
+            <ul class="link-list" data-category="maps">
+                <li><a href="https://www.davidrumsey.com" target="_blank">David Rumsey Map Collection</a></li>
+                <li><a href="https://www.loc.gov/maps" target="_blank">Library of Congress Maps</a></li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 历史研究导航 | 由 <a href="https://x.ai" target="_blank">xAI</a> 提供技术支持</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
