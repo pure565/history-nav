@@ -15,10 +15,15 @@
             --autumn-light: #fde3a7;
         }
         
-        body {
+        html, body {
+            height: 100%;
             margin: 0;
             padding: 0;
+        }
+
+        body {
             font-family: 'Microsoft YaHei', sans-serif;
+            font-size: 16px;
             background: linear-gradient(to bottom, var(--autumn-light), #f5d76e);
             color: var(--autumn-dark);
             min-height: 100vh;
@@ -26,48 +31,26 @@
             overflow-x: hidden;
         }
         
-        /* 落叶容器 */
-        #leaves-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            overflow: hidden;
-        }
-        
-        .leaf {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-size: cover;
-            opacity: 0.7;
-            top: -50px;
-        }
-        
-        /* 头部样式 */
         header {
             background-color: rgba(230, 126, 34, 0.9);
             color: white;
-            padding: 1.5rem;
+            padding: 1rem;
             text-align: center;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
         
         header h1 {
             margin: 0;
-            font-size: 2.2rem;
+            font-size: 1.8rem;
         }
         
         header p {
-            margin: 0.5rem 0 1.5rem;
-            font-size: 1.1rem;
+            margin: 0.5rem 0 1rem;
+            font-size: 1rem;
         }
         
         #searchInput {
-            padding: 0.8rem 1rem;
+            padding: 0.6rem 1rem;
             width: 80%;
             max-width: 500px;
             border: none;
@@ -76,9 +59,8 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         
-        /* 主内容区样式 */
         main {
-            padding: 2rem;
+            padding: 1rem;
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -86,8 +68,8 @@
         .category {
             background-color: rgba(255, 255, 255, 0.85);
             border-radius: 10px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
             border-left: 5px solid var(--autumn-orange);
         }
@@ -97,14 +79,15 @@
             margin-top: 0;
             border-bottom: 2px dashed var(--autumn-yellow);
             padding-bottom: 0.5rem;
+            font-size: 1.5rem;
         }
         
         .link-list {
             list-style-type: none;
             padding: 0;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 0.8rem;
         }
         
         .link-list li {
@@ -113,7 +96,7 @@
         
         .link-list a {
             display: block;
-            padding: 0.8rem 1rem;
+            padding: 0.6rem 1rem;
             background-color: rgba(241, 196, 15, 0.2);
             color: var(--autumn-dark);
             text-decoration: none;
@@ -129,13 +112,12 @@
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
         }
         
-        /* 页脚样式 */
         footer {
             text-align: center;
-            padding: 1.5rem;
+            padding: 1rem;
             background-color: rgba(140, 74, 47, 0.9);
             color: white;
-            margin-top: 2rem;
+            margin-top: 1.5rem;
         }
         
         footer a {
@@ -147,40 +129,47 @@
             text-decoration: underline;
         }
         
-        /* 响应式设计 */
         @media (max-width: 768px) {
             .link-list {
                 grid-template-columns: 1fr;
             }
             
             main {
-                padding: 1rem;
+                padding: 0.5rem;
+            }
+            
+            header h1 {
+                font-size: 1.5rem;
+            }
+            
+            header p {
+                font-size: 0.9rem;
+            }
+            
+            #searchInput {
+                width: 90%;
             }
         }
     </style>
 </head>
 <body>
-    <!-- 落叶容器 -->
-    <div id="leaves-container"></div>
-    
     <header>
         <h1>小历 - 历史研究导航</h1>
         <p>为历史研究者提供优质资源链接</p>
-        <input type="text" id="searchInput" placeholder="搜索资源..." onkeyup="searchLinks()">
+        <input type="text" id="searchInput" placeholder="搜索资源...">
     </header>
     
-    <main>
-        <!-- 分类将通过JavaScript动态生成 -->
-    </main>
+    <main></main>
     
     <footer>
         <p>&copy; 2025 小历 | 由 <a href="https://x.ai" target="_blank">xAI</a> 提供技术支持</p>
     </footer>
     <p>
-            <a href="https://pdf.baimiaoapp.com/landing/af9cqr2ghw" class="custom-link" rel="noopener noreferrer">访问 PDF 工具</a>
-        </p>
+        <a href="https://pdf.baimiaoapp.com/landing/af9cqr2ghw" class="custom-link" rel="noopener noreferrer">访问 PDF 工具</a>
+    </p>
+    
     <script>
-        // 分类数据
+        // 分类数据（更新部分）
         const categories = [
             {
                 title: "史学前沿",
@@ -207,7 +196,10 @@
                     { name: "河北图书馆", url: "http://www.helib.net/index.htm" },
                     { name: "贵州数字图书馆", url: "https://www.gzlib.org/" },
                     { name: "长春市图书馆", url: "https://ccelib.cn/" },
-                    { name: "上海图书馆", url: "https://www.library.sh.cn/" }
+                    { name: "上海图书馆", url: "https://www.library.sh.cn/" },
+                    { name: "高校与图书馆导航", url: "https://szsyw.cn/libs" },
+                    { name: "山东省图书馆", url: "http://www.sdlib.com/?ref=https://szsyw.cn" },
+                    { name: "湖北省图书馆（最好用）", url: "https://www.library.hb.cn/" }
                 ]
             },
             {
@@ -280,37 +272,38 @@
             }
         ];
 
-        // 页面加载完成后生成分类
-        document.addEventListener('DOMContentLoaded', function() {
-            generateCategories();
-            createLeaves();
-        });
+        // 防抖函数
+        function debounce(func, wait) {
+            let timeout;
+            return function (...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), wait);
+            };
+        }
+
+        // 立即生成分类
+        generateCategories();
 
         // 生成分类HTML
         function generateCategories() {
             const mainElement = document.querySelector('main');
-            
             categories.forEach(category => {
                 const section = document.createElement('section');
                 section.className = 'category';
-                
                 const heading = document.createElement('h2');
                 heading.textContent = category.title;
-                
                 const list = document.createElement('ul');
                 list.className = 'link-list';
-                
                 category.links.forEach(link => {
                     const listItem = document.createElement('li');
                     const anchor = document.createElement('a');
                     anchor.href = link.url;
                     anchor.textContent = link.name;
                     anchor.target = '_blank';
-                    
+                    anchor.setAttribute('rel', 'noopener noreferrer');
                     listItem.appendChild(anchor);
                     list.appendChild(listItem);
                 });
-                
                 section.appendChild(heading);
                 section.appendChild(list);
                 mainElement.appendChild(section);
@@ -322,11 +315,9 @@
             const input = document.getElementById('searchInput');
             const filter = input.value.toLowerCase();
             const categories = document.querySelectorAll('.category');
-            
             categories.forEach(category => {
                 const links = category.querySelectorAll('a');
                 let categoryVisible = false;
-                
                 links.forEach(link => {
                     const text = link.textContent.toLowerCase();
                     if (text.includes(filter)) {
@@ -336,70 +327,12 @@
                         link.parentElement.style.display = 'none';
                     }
                 });
-                
                 category.style.display = categoryVisible ? 'block' : 'none';
             });
         }
 
-        // 创建落叶效果
-        function createLeaves() {
-            const leavesContainer = document.getElementById('leaves-container');
-            const leafColors = ['#e67e22', '#8c4a2f', '#c0392b', '#f1c40f', '#7d3c0d'];
-            const leafShapes = [
-                'polygon(50% 0%, 0% 100%, 100% 100%)',
-                'polygon(50% 100%, 0% 0%, 100% 0%)',
-                'polygon(0% 0%, 0% 100%, 30% 100%, 50% 70%, 70% 100%, 100% 100%, 100% 0%)',
-                'polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%)'
-            ];
-            
-            // 创建30片叶子
-            for (let i = 0; i < 30; i++) {
-                const leaf = document.createElement('div');
-                leaf.className = 'leaf';
-                
-                // 随机选择颜色和形状
-                const color = leafColors[Math.floor(Math.random() * leafColors.length)];
-                const shape = leafShapes[Math.floor(Math.random() * leafShapes.length)];
-                
-                leaf.style.backgroundColor = color;
-                leaf.style.clipPath = shape;
-                leaf.style.webkitClipPath = shape;
-                
-                // 随机位置和动画
-                const left = Math.random() * 100;
-                const delay = Math.random() * 15;
-                const duration = 10 + Math.random() * 20;
-                const swing = 50 + Math.random() * 100;
-                
-                leaf.style.left = `${left}vw`;
-                leaf.style.animation = `
-                    fall ${duration}s linear ${delay}s infinite,
-                    sway ${duration/3}s ease-in-out ${delay}s infinite alternate
-                `;
-                
-                leavesContainer.appendChild(leaf);
-            }
-            
-            // 添加动画样式
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes fall {
-                    to {
-                        transform: translateY(105vh) rotate(360deg);
-                    }
-                }
-                
-                @keyframes sway {
-                    from {
-                        transform: translateX(0) rotate(-5deg);
-                    }
-                    to {
-                        transform: translateX(${Math.random() > 0.5 ? '' : '-'}${Math.random() * 50 + 50}px) rotate(5deg);
-                    }
-                }
-            `;
-            document.head.appendChild(style);
-        }
+        // 添加防抖的搜索事件监听
+        document.getElementById('searchInput').addEventListener('keyup', debounce(searchLinks, 300));
     </script>
 </body>
 </html>
