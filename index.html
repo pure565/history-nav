@@ -213,6 +213,10 @@
                 width: 90%;
             }
         }
+        .hidden {
+    display: none;
+}
+
     </style>
 </head>
 <body>
@@ -228,181 +232,180 @@
         <p>&copy; 2025 小历</p>
     </footer>
     
-    <script>
-        // 分类数据
-        const categories = [
-            {
-                title: "史学前沿",
-                links: [
-                    { name: "全国哲学社会科学工作办公室", url: "http://www.nopss.gov.cn/GB/index.html" },
-                    { name: "中国社会科学院哲学研究所", url: "http://philosophy.cass.cn/tushudangan/zxxkfw/202305/t20230510_5637193.html" }
-                ]
-            },
-            {
-                title: "论文投稿",
-                links: [
-                    { name: "万维书刊网", url: "https://www.eshukan.com/?_d_id=2da568659942fcd3da09772d782e23" },
-                    { name: "集刊全文数据库", url: "https://www.jikan.com.cn/" },
-                    { name: "中国近现代史专业期刊推荐", url: "https://www.xueshuwenhai.com/zzList/sflzgjxds" }
-                ]
-            },
-            {
-                title: "各大图书馆免费网上电子资源",
-                links: [
-                    { name: "中国国家图书馆", url: "https://www.nlc.cn/web/index.shtml" },
-                    { name: "广西壮族自治区图书馆", url: "https://www.gxlib.org.cn/" },
-                    { name: "浙江图书馆", url: "https://www.zjlib.cn/" },
-                    { name: "福建图书馆", url: "https://www.fjlib.net/#page2" },
-                    { name: "河北图书馆", url: "http://www.helib.net/index.htm" },
-                    { name: "贵州数字图书馆", url: "https://www.gzlib.org/" },
-                    { name: "长春市图书馆", url: "https://ccelib.cn/" },
-                    { name: "上海图书馆", url: "https://www.library.sh.cn/" },
-                    { name: "高校与图书馆导航", url: "https://szsyw.cn/libs" },
-                    { name: "山东省图书馆", url: "http://www.sdlib.com/?ref=https://szsyw.cn" },
-                    { name: "湖北省图书馆（最好用）", url: "https://www.library.hb.cn/" },
-                    { name: "日本国立公文书馆", url: "https://www.digital.archives.go.jp/" }
-                ]
-            },
-            {
-                title: "历史电子书找书",
-                links: [
-                    { name: "全国图书馆参考咨询联盟", url: "http://www.ucdrs.superlib.net/" },
-                    { name: "龙岩网络图书馆", url: "http://www.ly.superlib.net" },
-                    { name: "读秀网址", url: "http://www.duxiu.com" },
-                    { name: "找书网", url: "https://www.findbooks.eu.org/" },
-                    { name: "识典古籍", url: "https://www.shidianguji.com/?page_from=home_page" },
-                    { name: "书格", url: "https://www.shuge.org/" },
-                    { name: "查即得", url: "https://www.chajide.com/" },
-                    { name: "安娜的档案", url: "https://zh.annas-archive.org/" },
-                    { name: "Zlibrary", url: "https://z-library.sk/" }
-                ]
-            },
-            {
-                title: "工具箱子",
-                links: [
-                    { name: "籍合网", url: "https://ancientbooks.cn/" },
-                    { name: "人名权威-人物传记资料库", url: "https://newarchive.ihp.sinica.edu.tw/sncaccgi/sncacFtp?@@0.6242090490582928" },
-                    { name: "兩千年中西曆轉換", url: "https://sinocal.sinica.edu.tw/" },
-                    { name: "经籍指掌", url: "https://bib.pkudh.org/statistic" },
-                    { name: "中国历代人物传记资料库", url: "https://db1.ihp.sinica.edu.tw/cbdbc/ttsweb?@0:0:1:cbdbkm@@0.47946741292253137" },
-                    { name: "白云深处", url: "http://www.homeinmists.com/indexComputing.htm" },
-                    { name: "知识图谱", url: "https://cnkgraph.com/Calendar" },
-                    { name: "中华文史网", url: "http://www.historychina.net/" }
-                ]
-            },
-            {
-                title: "有用的导航网站",
-                links: [
-                    { name: "效率集", url: "https://www.xiaolvji.com/u/ljyandlwl" },
-                    { name: "烟海", url: "http://www.yanhainav.cn/" },
-                    { name: "数字素养网", url: "https://szsyw.cn/" },
-                    { name: "喜欢书签", url: "https://www.likebookmark.com/" },
-                    { name: "古籍觅宝", url: "https://guji99.com/" }
-                ]
-            },
-            {
-                title: "清史专题",
-                links: [
-                    { name: "档案馆馆藏检索系统", url: "https://archivesonline.mh.sinica.edu.tw/" },
-                    { name: "清代档案检索系统", url: "https://qingarchives.npm.edu.tw/" },
-                    { name: "中央研究院近代史研究所", url: "https://www.mh.sinica.edu.tw/Index.aspx" },
-                    { name: "中华古籍智慧化服务平台", url: "https://guji.nlc.cn/" },
-                    { name: "中国第一历史档案馆", url: "https://fhac.com.cn/index.html" },
-                    { name: "中国历史研究院", url: "http://hrczh.cass.cn/bygl/zzjg/" },
-                    { name: "抗日战争平台", url: "https://www.modernhistory.org.cn/#/" },
-                    { name: "明清档案工作室", url: "https://newarchive.ihp.sinica.edu.tw/" },
-                    { name: "国家哲学社会科学中心", url: "https://www.ncpssd.cn/" },
-                    { name: "清季职官表查询", url: "http://ssop.digital.ntu.edu.tw/index.php" },
-                    { name: "晚清民国文献平台", url: "https://lateqr.ancientbooks.cn/docWenxian/" }
-                ]
-            },
-            {
-                title: "轻松娱乐",
-                links: [
-                    { name: "小霸王", url: "http://ending.fun/" }
-                ]
-            },
-            {
-                title: "网盘资源",
-                links: [
-                    { name: "懒盘资源", url: "https://www.lzpanx.com/" },
-                    { name: "Dac导航", url: "https://dacdh.top/" },
-                    { name: "盘搜pro", url: "https://panso.pro/" },
-                    { name: "友沃可云盘", url: "https://pan.uvooc.com/" }
-                ]
-            }
-        ];
-        // 防抖函数
-        function debounce(func, wait) {
-            let timeout;
-            return function (...args) {
-                clearTimeout(timeout);
-                timeout = setTimeout(() => func.apply(this, args), wait);
-            };
+<script>
+    // 分类数据（这部分保持不变）
+    const categories = [
+        {
+            title: "史学前沿",
+            links: [
+                { name: "全国哲学社会科学工作办公室", url: "http://www.nopss.gov.cn/GB/index.html" },
+                { name: "中国社会科学院哲学研究所", url: "http://philosophy.cass.cn/tushudangan/zxxkfw/202305/t20230510_5637193.html" }
+            ]
+        },
+        {
+            title: "论文投稿",
+            links: [
+                { name: "万维书刊网", url: "https://www.eshukan.com/?_d_id=2da568659942fcd3da09772d782e23" },
+                { name: "集刊全文数据库", url: "https://www.jikan.com.cn/" },
+                { name: "中国近现代史专业期刊推荐", url: "https://www.xueshuwenhai.com/zzList/sflzgjxds" }
+            ]
+        },
+        {
+            title: "各大图书馆免费网上电子资源",
+            links: [
+                { name: "中国国家图书馆", url: "https://www.nlc.cn/web/index.shtml" },
+                { name: "广西壮族自治区图书馆", url: "https://www.gxlib.org.cn/" },
+                { name: "浙江图书馆", url: "https://www.zjlib.cn/" },
+                { name: "福建图书馆", url: "https://www.fjlib.net/#page2" },
+                { name: "河北图书馆", url: "http://www.helib.net/index.htm" },
+                { name: "贵州数字图书馆", url: "https://www.gzlib.org/" },
+                { name: "长春市图书馆", url: "https://ccelib.cn/" },
+                { name: "上海图书馆", url: "https://www.library.sh.cn/" },
+                { name: "高校与图书馆导航", url: "https://szsyw.cn/libs" },
+                { name: "山东省图书馆", url: "http://www.sdlib.com/?ref=https://szsyw.cn" },
+                { name: "湖北省图书馆（最好用）", url: "https://www.library.hb.cn/" },
+                { name: "日本国立公文书馆", url: "https://www.digital.archives.go.jp/" }
+            ]
+        },
+        {
+            title: "历史电子书找书",
+            links: [
+                { name: "全国图书馆参考咨询联盟", url: "http://www.ucdrs.superlib.net/" },
+                { name: "龙岩网络图书馆", url: "http://www.ly.superlib.net" },
+                { name: "读秀网址", url: "http://www.duxiu.com" },
+                { name: "找书网", url: "https://www.findbooks.eu.org/" },
+                { name: "识典古籍", url: "https://www.shidianguji.com/?page_from=home_page" },
+                { name: "书格", url: "https://www.shuge.org/" },
+                { name: "查即得", url: "https://www.chajide.com/" },
+                { name: "安娜的档案", url: "https://zh.annas-archive.org/" },
+                { name: "Zlibrary", url: "https://z-library.sk/" }
+            ]
+        },
+        {
+            title: "工具箱子",
+            links: [
+                { name: "籍合网", url: "https://ancientbooks.cn/" },
+                { name: "人名权威-人物传记资料库", url: "https://newarchive.ihp.sinica.edu.tw/sncaccgi/sncacFtp?@@0.6242090490582928" },
+                { name: "兩千年中西曆轉換", url: "https://sinocal.sinica.edu.tw/" },
+                { name: "经籍指掌", url: "https://bib.pkudh.org/statistic" },
+                { name: "中国历代人物传记资料库", url: "https://db1.ihp.sinica.edu.tw/cbdbc/ttsweb?@0:0:1:cbdbkm@@0.47946741292253137" },
+                { name: "白云深处", url: "http://www.homeinmists.com/indexComputing.htm" },
+                { name: "知识图谱", url: "https://cnkgraph.com/Calendar" },
+                { name: "中华文史网", url: "http://www.historychina.net/" }
+            ]
+        },
+        {
+            title: "有用的导航网站",
+            links: [
+                { name: "效率集", url: "https://www.xiaolvji.com/u/ljyandlwl" },
+                { name: "烟海", url: "http://www.yanhainav.cn/" },
+                { name: "数字素养网", url: "https://szsyw.cn/" },
+                { name: "喜欢书签", url: "https://www.likebookmark.com/" },
+                { name: "古籍觅宝", url: "https://guji99.com/" }
+            ]
+        },
+        {
+            title: "清史专题",
+            links: [
+                { name: "档案馆馆藏检索系统", url: "https://archivesonline.mh.sinica.edu.tw/" },
+                { name: "清代档案检索系统", url: "https://qingarchives.npm.edu.tw/" },
+                { name: "中央研究院近代史研究所", url: "https://www.mh.sinica.edu.tw/Index.aspx" },
+                { name: "中华古籍智慧化服务平台", url: "https://guji.nlc.cn/" },
+                { name: "中国第一历史档案馆", url: "https://fhac.com.cn/index.html" },
+                { name: "中国历史研究院", url: "http://hrczh.cass.cn/bygl/zzjg/" },
+                { name: "抗日战争平台", url: "https://www.modernhistory.org.cn/#/" },
+                { name: "明清档案工作室", url: "https://newarchive.ihp.sinica.edu.tw/" },
+                { name: "国家哲学社会科学中心", url: "https://www.ncpssd.cn/" },
+                { name: "清季职官表查询", url: "http://ssop.digital.ntu.edu.tw/index.php" },
+                { name: "晚清民国文献平台", url: "https://lateqr.ancientbooks.cn/docWenxian/" }
+            ]
+        },
+        {
+            title: "轻松娱乐",
+            links: [
+                { name: "小霸王", url: "http://ending.fun/" }
+            ]
+        },
+        {
+            title: "网盘资源",
+            links: [
+                { name: "懒盘资源", url: "https://www.lzpanx.com/" },
+                { name: "Dac导航", url: "https://dacdh.top/" },
+                { name: "盘搜pro", url: "https://panso.pro/" },
+                { name: "友沃可云盘", url: "https://pan.uvooc.com/" }
+            ]
         }
-        
-        // 立即生成分类
-        generateCategories(categories);
+    ];
 
-        // 生成分类HTML
-        function generateCategories(data) {
-            const mainElement = document.querySelector('main');
-            mainElement.innerHTML = ''; // 清空现有内容以备搜索
-            data.forEach(category => {
-                const section = document.createElement('section');
-                section.className = 'category';
-                const heading = document.createElement('h2');
-                heading.textContent = category.title;
-                const list = document.createElement('ul');
-                list.className = 'link-list';
-                category.links.forEach(link => {
-                    const listItem = document.createElement('li');
-                    const anchor = document.createElement('a');
-                    anchor.href = link.url;
-                    anchor.textContent = link.name;
-                    anchor.target = '_blank';
-                    anchor.setAttribute('rel', 'noopener noreferrer');
-                    listItem.appendChild(anchor);
-                    list.appendChild(listItem);
-                });
-                section.appendChild(heading);
-                section.appendChild(list);
-                mainElement.appendChild(section);
+    // 防抖函数，防止高频触发搜索，提升性能
+    function debounce(func, wait) {
+        let timeout;
+        return function (...args) {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(this, args), wait);
+        };
+    }
+
+    // 生成分类HTML
+    function generateCategories(data) {
+        const mainElement = document.querySelector('main');
+        mainElement.innerHTML = ''; // 清空现有内容
+        data.forEach(category => {
+            const section = document.createElement('section');
+            section.className = 'category';
+            const heading = document.createElement('h2');
+            heading.textContent = category.title;
+            const list = document.createElement('ul');
+            list.className = 'link-list';
+            category.links.forEach(link => {
+                const listItem = document.createElement('li');
+                const anchor = document.createElement('a');
+                anchor.href = link.url;
+                anchor.textContent = link.name;
+                anchor.target = '_blank';
+                anchor.setAttribute('rel', 'noopener noreferrer');
+                listItem.appendChild(anchor);
+                list.appendChild(listItem);
             });
-        }
-        
-        // 搜索功能
-        function searchLinks() {
-            const input = document.getElementById('searchInput');
-            const filter = input.value.toLowerCase();
-            const allCategories = document.querySelectorAll('.category');
+            section.appendChild(heading);
+            section.appendChild(list);
+            mainElement.appendChild(section);
+        });
+    }
 
-            allCategories.forEach(category => {
-                const links = category.querySelectorAll('.link-list li');
-                let hasVisibleLink = false;
+    // ⭐ 优化后的搜索功能 ⭐
+    function searchLinks() {
+        const filter = document.getElementById('searchInput').value.toLowerCase();
+        const categories = document.querySelectorAll('.category');
 
-                links.forEach(li => {
-                    const linkName = li.querySelector('a').textContent.toLowerCase();
-                    if (linkName.includes(filter)) {
-                        li.style.display = 'block';
-                        hasVisibleLink = true;
-                    } else {
-                        li.style.display = 'none';
-                    }
-                });
+        categories.forEach(category => {
+            const links = category.querySelectorAll('.link-list li');
+            let isCategoryVisible = false;
 
-                // 如果分类下有可见链接，则显示分类，否则隐藏
-                if (hasVisibleLink) {
-                    category.style.display = 'block';
-                } else {
-                    category.style.display = 'none';
+            links.forEach(li => {
+                const linkText = li.querySelector('a').textContent.toLowerCase();
+                const isLinkVisible = linkText.includes(filter);
+                
+                // 根据是否可见，切换 .hidden 类的存在
+                li.classList.toggle('hidden', !isLinkVisible);
+                
+                // 只要有一个链接可见，分类就应该可见
+                if (isLinkVisible) {
+                    isCategoryVisible = true;
                 }
             });
-        }
-        
-        // 添加防抖的搜索事件监听
-        document.getElementById('searchInput').addEventListener('input', debounce(searchLinks, 300));
 
-    </script>
+            // 根据分类下是否有可见链接，切换整个分类的 .hidden 类
+            category.classList.toggle('hidden', !isCategoryVisible);
+        });
+    }
+
+    // 页面加载时立即生成分类
+    generateCategories(categories);
+
+    // 为搜索框添加防抖的输入事件监听
+    document.getElementById('searchInput').addEventListener('input', debounce(searchLinks, 300));
+</script>
+
 </body>
 </html>
