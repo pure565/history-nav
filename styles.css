@@ -1,16 +1,40 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
+/* 1. 全局变量定义 */
+:root {
+    --primary-color: #2c3e50;  /* 主色调 (深蓝灰) */
+    --secondary-color: #f4f4f4; /* 背景色 (浅灰) */
+    --accent-color: #3498db;   /* 强调色 (亮蓝) */
+    --text-color: #333;        /* 主要文字颜色 */
+    --light-text-color: white; /* 浅色文字 (用于深色背景) */
+    --card-bg-color: white;    /* 卡片背景色 */
+    --border-radius: 8px;      /* 统一圆角大小 */
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* 统一阴影效果 */
 }
 
+/* 2. 基础重置与全局样式 */
+*, *::before, *::after {
+    box-sizing: border-box; /* 现代盒模型 */
+}
+
+html {
+    scroll-behavior: smooth; /* 平滑滚动效果 */
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif; /* 现代字体栈 */
+    margin: 0;
+    padding: 0;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    line-height: 1.6; /* 改善可读性 */
+}
+
+/* 3. 页面主要区域：页眉、主内容、页脚 */
 header {
-    background-color: #2c3e50;
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
     text-align: center;
-    padding: 2rem;
+    padding: 2.5rem 1.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 header h1 {
@@ -19,70 +43,108 @@ header h1 {
 }
 
 header p {
-    margin: 0.5rem 0;
+    margin: 0.5rem 0 1.5rem;
+    opacity: 0.9;
 }
 
 #searchInput {
-    padding: 0.5rem;
-    width: 80%;
+    padding: 0.8rem 1rem;
+    width: 90%;
     max-width: 500px;
-    margin-top: 1rem;
-    border: none;
-    border-radius: 5px;
+    border: 1px solid transparent;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+#searchInput:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
 }
 
 main {
     max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 1rem;
+    margin: 3rem auto;
+    padding: 0 1.5rem;
 }
 
+footer {
+    text-align: center;
+    padding: 2rem;
+    margin-top: 3rem;
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+}
+
+footer a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+
+/* 4. 链接分类与列表样式 */
 .category {
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
 }
 
 .category h2 {
-    color: #2c3e50;
-    border-bottom: 2px solid #3498db;
-    padding-bottom: 0.5rem;
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    border-bottom: 3px solid var(--accent-color);
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.5rem;
 }
 
 .link-list {
     list-style: none;
     padding: 0;
+    display: grid; /* 启用网格布局 */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* 响应式网格列 */
+    gap: 1.5rem; /* 网格间距 */
 }
 
 .link-list li {
-    margin: 0.5rem 0;
+    margin: 0; /* 在 grid 布局中不再需要 margin */
 }
 
 .link-list a {
-    color: #3498db;
+    display: block;
+    padding: 1rem 1.25rem;
+    background-color: var(--card-bg-color);
+    color: var(--accent-color);
     text-decoration: none;
     font-size: 1.1rem;
+    font-weight: 500;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
 }
 
 .link-list a:hover {
-    text-decoration: underline;
+    text-decoration: none;
+    transform: translateY(-4px); /* 悬停时轻微上浮 */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12); /* 悬停时阴影加深 */
 }
 
-footer {
-    text-align: center;
-    padding: 1rem;
-    background-color: #2c3e50;
-    color: white;
-}
-
-footer a {
-    color: #3498db;
-}
-
-@media (max-width: 600px) {
+/* 5. 响应式设计 */
+@media (max-width: 768px) {
     header h1 {
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
 
-    #searchInput {
-        width: 100%;
+    main {
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+
+    .link-list {
+        grid-template-columns: 1fr; /* 在小屏幕上变为单列 */
+        gap: 1rem;
     }
 }
