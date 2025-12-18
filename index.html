@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>小历 - 历史研究导航</title>
+    <title>小历 - 历史研究导航 (赛博朋克版)</title>
     <style>
-        /* 基础样式 - 秋天色调 */
+        /* 基础样式 - 赛博朋克风格 */
         :root {
-            --autumn-orange: #e67e22;
-            --autumn-brown: #8c4a2f;
-            --autumn-yellow: #f1c40f;
-            --autumn-red: #c0392b;
-            --autumn-dark: #7d3c0d;
-            --autumn-light: #fde3a7;
+            --cyber-bg: #0a0a23; /* 深蓝黑背景 */
+            --cyber-primary: #00ffff; /* 主色 - 霓虹蓝 */
+            --cyber-secondary: #ff00ff; /* 辅色 - 洋红 */
+            --cyber-accent: #fcee0a; /* 点缀色 - 亮黄 */
+            --cyber-text: #d0d0d0; /* 基础文字颜色 */
+            --cyber-glow-primary: rgba(0, 255, 255, 0.7);
+            --cyber-glow-secondary: rgba(255, 0, 255, 0.5);
         }
         
         html, body {
@@ -22,41 +23,82 @@
         }
 
         body {
-            font-family: 'Microsoft YaHei', sans-serif;
+            font-family: 'Consolas', 'Courier New', monospace; /* 科技感字体 */
             font-size: 16px;
-            background: linear-gradient(to bottom, var(--autumn-light), #f5d76e);
-            color: var(--autumn-dark);
+            background-color: var(--cyber-bg);
+            /* 添加网格背景 */
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            color: var(--cyber-text);
             min-height: 100vh;
             position: relative;
             overflow-x: hidden;
+            text-shadow: 0 0 1px rgba(208, 208, 208, 0.3);
         }
         
         header {
-            background-color: rgba(230, 126, 34, 0.9);
+            background-color: rgba(10, 10, 35, 0.7);
+            backdrop-filter: blur(5px);
             color: white;
-            padding: 1rem;
+            padding: 1.5rem 1rem;
             text-align: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            border-bottom: 2px solid var(--cyber-primary);
+            box-shadow: 0 5px 20px -5px var(--cyber-glow-primary);
+            margin-bottom: 1.5rem;
         }
         
         header h1 {
             margin: 0;
-            font-size: 1.8rem;
+            font-size: 2.2rem;
+            color: var(--cyber-primary);
+            text-shadow: 
+                0 0 5px var(--cyber-primary),
+                0 0 10px var(--cyber-primary),
+                0 0 15px var(--cyber-primary);
+            animation: flicker 3s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0%, 18%, 22%, 25%, 53%, 57%, 100% {
+                text-shadow:
+                0 0 4px var(--cyber-primary),
+                0 0 11px var(--cyber-primary),
+                0 0 19px var(--cyber-primary);
+            }
+            20%, 24%, 55% {       
+                text-shadow: none;
+            }
         }
         
         header p {
             margin: 0.5rem 0 1rem;
             font-size: 1rem;
+            color: var(--cyber-text);
         }
         
         #searchInput {
-            padding: 0.6rem 1rem;
+            padding: 0.8rem 1.2rem;
             width: 80%;
             max-width: 500px;
-            border: none;
-            border-radius: 25px;
+            border: 1px solid var(--cyber-primary);
+            border-radius: 0; /* 锋利边缘 */
             font-size: 1rem;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: rgba(0, 255, 255, 0.05);
+            color: var(--cyber-text);
+            box-shadow: inset 0 0 8px rgba(0, 255, 255, 0.2);
+            font-family: inherit;
+        }
+
+        #searchInput::placeholder {
+            color: rgba(208, 208, 208, 0.5);
+        }
+
+        #searchInput:focus {
+            outline: none;
+            box-shadow: 0 0 10px var(--cyber-glow-primary);
+            background-color: rgba(0, 255, 255, 0.1);
         }
         
         main {
@@ -66,20 +108,22 @@
         }
         
         .category {
-            background-color: rgba(255, 255, 255, 0.85);
-            border-radius: 10px;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-            border-left: 5px solid var(--autumn-orange);
+            background-color: rgba(10, 10, 35, 0.6);
+            backdrop-filter: blur(3px);
+            border: 1px solid var(--cyber-secondary);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 0 15px -5px var(--cyber-glow-secondary);
+            border-left: 4px solid var(--cyber-secondary);
         }
         
         .category h2 {
-            color: var(--autumn-brown);
+            color: var(--cyber-secondary);
             margin-top: 0;
-            border-bottom: 2px dashed var(--autumn-yellow);
-            padding-bottom: 0.5rem;
-            font-size: 1.5rem;
+            border-bottom: 1px solid var(--cyber-secondary);
+            padding-bottom: 0.8rem;
+            font-size: 1.7rem;
+            text-shadow: 0 0 5px var(--cyber-glow-secondary);
         }
         
         .link-list {
@@ -87,46 +131,65 @@
             padding: 0;
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 0.8rem;
+            gap: 1rem;
         }
         
         .link-list li {
-            margin-bottom: 0.5rem;
+            margin: 0;
         }
         
         .link-list a {
             display: block;
-            padding: 0.6rem 1rem;
-            background-color: rgba(241, 196, 15, 0.2);
-            color: var(--autumn-dark);
+            padding: 0.8rem 1rem;
+            background-color: transparent;
+            color: var(--cyber-text);
             text-decoration: none;
-            border-radius: 5px;
             transition: all 0.3s ease;
-            border: 1px solid rgba(241, 196, 15, 0.3);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-list a::before {
+            content: '>';
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--cyber-primary);
+            transition: left 0.3s ease;
         }
         
         .link-list a:hover {
-            background-color: var(--autumn-orange);
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            background-color: var(--cyber-primary);
+            color: var(--cyber-bg);
+            text-shadow: none;
+            box-shadow: 0 0 15px var(--cyber-glow-primary);
+            transform: translateY(-2px);
+            border-color: var(--cyber-primary);
+        }
+
+        .link-list a:hover::before {
+            left: 10px;
         }
         
         footer {
             text-align: center;
-            padding: 1rem;
-            background-color: rgba(140, 74, 47, 0.9);
-            color: white;
-            margin-top: 1.5rem;
+            padding: 1.5rem 1rem;
+            background-color: rgba(10, 10, 35, 0.7);
+            color: var(--cyber-text);
+            margin-top: 2rem;
+            border-top: 1px solid var(--cyber-primary);
         }
         
         footer a {
-            color: var(--autumn-yellow);
+            color: var(--cyber-accent);
             text-decoration: none;
         }
         
         footer a:hover {
             text-decoration: underline;
+            text-shadow: 0 0 5px var(--cyber-accent);
         }
         
         @media (max-width: 768px) {
@@ -139,7 +202,7 @@
             }
             
             header h1 {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
             }
             
             header p {
@@ -162,20 +225,11 @@
     <main></main>
     
     <footer>
-        <p>&copy; 2025 小历 | 由 <a href="https://x.ai" target="_blank">xAI</a> 提供技术支持</p>
+        <p>&copy; 2025 小历</p>
     </footer>
-    <p>
-        <a href="https://pdf.baimiaoapp.com/landing/af9cqr2ghw" class="custom-link" rel="noopener noreferrer">访问 PDF 工具</a>
-    </p>
-    <footer>
-    <p>
-    <a  href="https://metshop.cn?referrerUserNo=" target="_blank" rel="noopener noreferrer" title="MetShop蜜糖商店">
-    MetShop蜜糖商店 </a>
-    </p>
-</footer>
     
     <script>
-        // 分类数据（更新部分）
+        // 分类数据
         const categories = [
             {
                 title: "史学前沿",
@@ -278,7 +332,6 @@
                 ]
             }
         ];
-
         // 防抖函数
         function debounce(func, wait) {
             let timeout;
@@ -287,14 +340,15 @@
                 timeout = setTimeout(() => func.apply(this, args), wait);
             };
         }
-
+        
         // 立即生成分类
-        generateCategories();
+        generateCategories(categories);
 
         // 生成分类HTML
-        function generateCategories() {
+        function generateCategories(data) {
             const mainElement = document.querySelector('main');
-            categories.forEach(category => {
+            mainElement.innerHTML = ''; // 清空现有内容以备搜索
+            data.forEach(category => {
                 const section = document.createElement('section');
                 section.className = 'category';
                 const heading = document.createElement('h2');
@@ -316,30 +370,39 @@
                 mainElement.appendChild(section);
             });
         }
-
+        
         // 搜索功能
         function searchLinks() {
             const input = document.getElementById('searchInput');
             const filter = input.value.toLowerCase();
-            const categories = document.querySelectorAll('.category');
-            categories.forEach(category => {
-                const links = category.querySelectorAll('a');
-                let categoryVisible = false;
-                links.forEach(link => {
-                    const text = link.textContent.toLowerCase();
-                    if (text.includes(filter)) {
-                        link.parentElement.style.display = 'block';
-                        categoryVisible = true;
+            const allCategories = document.querySelectorAll('.category');
+
+            allCategories.forEach(category => {
+                const links = category.querySelectorAll('.link-list li');
+                let hasVisibleLink = false;
+
+                links.forEach(li => {
+                    const linkName = li.querySelector('a').textContent.toLowerCase();
+                    if (linkName.includes(filter)) {
+                        li.style.display = 'block';
+                        hasVisibleLink = true;
                     } else {
-                        link.parentElement.style.display = 'none';
+                        li.style.display = 'none';
                     }
                 });
-                category.style.display = categoryVisible ? 'block' : 'none';
+
+                // 如果分类下有可见链接，则显示分类，否则隐藏
+                if (hasVisibleLink) {
+                    category.style.display = 'block';
+                } else {
+                    category.style.display = 'none';
+                }
             });
         }
-
+        
         // 添加防抖的搜索事件监听
-        document.getElementById('searchInput').addEventListener('keyup', debounce(searchLinks, 300));
+        document.getElementById('searchInput').addEventListener('input', debounce(searchLinks, 300));
+
     </script>
 </body>
 </html>
