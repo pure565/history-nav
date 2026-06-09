@@ -83,6 +83,7 @@ const categories = [
       { name: "数字素养网", url: "https://szsyw.cn/" },
       { name: "喜欢书签", url: "https://www.likebookmark.com/" },
       { name: "古籍聚宝", url: "https://guji99.com/" },
+      { name: "籍合网", url: "https://ancientbooks.cn/" },
     ],
   },
   {
