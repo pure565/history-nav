@@ -64,7 +64,7 @@ const categories = [
   {
     title: "工具箱",
     links: [
-      { name: "类聚", url: "https://ancientbooks.cn/" },
+      { name: "籍合网", url: "https://ancientbooks.cn/" },
       { name: "PDFcraft", url: "https://pdfcraft-55m.pages.dev/zh/" },
       { name: "人物传记资料库", url: "https://newarchive.ihp.sinica.edu.tw/sncaccgi/sncacFtp?@@0.6242090490582928" },
       { name: "两千年中西历转换", url: "https://sinocal.sinica.edu.tw/" },
@@ -83,7 +83,6 @@ const categories = [
       { name: "数字素养网", url: "https://szsyw.cn/" },
       { name: "喜欢书签", url: "https://www.likebookmark.com/" },
       { name: "古籍聚宝", url: "https://guji99.com/" },
-      { name: "籍合网", url: "https://ancientbooks.cn/" },
     ],
   },
   {
