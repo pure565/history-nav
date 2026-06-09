@@ -1,325 +1,39 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>小历 · 历史研究导航</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
-<style>
-
-:root{
---primary:#4fc3b1;
---accent:#ffd27d;
---text:#1f2d2b;
-}
-
-*{
-box-sizing:border-box;
-transition:.25s ease;
-}
-
-body{
-margin:0;
-font-family:Inter,system-ui;
-background:
-radial-gradient(circle at 20% 20%, #e9fff7 0%, transparent 40%),
-radial-gradient(circle at 80% 10%, #fff3dd 0%, transparent 45%),
-radial-gradient(circle at 50% 90%, #e6f2ff 0%, transparent 40%),
-#f9fbfa;
-color:var(--text);
-min-height:100vh;
-}
-
-header{
-text-align:center;
-padding:80px 24px 40px;
-}
-
-header h1{
-margin:0;
-font-size:48px;
-font-weight:600;
-}
-
-header p{
-margin:12px 0 32px;
-color:#666;
-}
-
-#searchInput{
-width:90%;
-max-width:480px;
-padding:14px 24px;
-border-radius:999px;
-border:1px solid #ddd;
-font-size:16px;
-outline:none;
-}
-
-#searchInput:focus{
-border-color:var(--primary);
-box-shadow:0 0 0 4px rgba(79,195,177,.25);
-}
-
-main{
-max-width:1100px;
-margin:auto;
-padding:40px 24px 80px;
-}
-
-.category{
-margin-bottom:72px;
-}
-
-.category h2{
-font-size:28px;
-margin-bottom:24px;
-}
-
-.link-list{
-list-style:none;
-padding:0;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
-}
-
-.link-list a{
-display:block;
-background:rgba(255,255,255,.85);
-backdrop-filter:blur(10px);
-padding:18px 22px;
-border-radius:20px;
-text-decoration:none;
-color:var(--text);
-box-shadow:0 10px 30px rgba(0,0,0,.06);
-}
-
-.link-list a:hover{
-transform:translateY(-6px);
-box-shadow:0 18px 50px rgba(0,0,0,.1);
-}
-
-footer{
-text-align:center;
-padding:60px 24px;
-color:#888;
-}
-
-.hidden{display:none;}
-
-@media(max-width:768px){
-header h1{font-size:36px;}
-}
-
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="历史研究导航页，按专题整理常用数据库、图书馆、工具和资源站点。">
+  <title>小卷 | 历史研究导航</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
 </head>
-
 <body>
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">History Nav</p>
+      <h1>小卷</h1>
+      <p class="hero-copy">为历史研究整理的常用导航页，覆盖数据库、图书馆、工具站点和专题资源。</p>
+      <label class="search-wrap" for="searchInput">
+        <span class="search-label">搜索资源</span>
+        <input id="searchInput" type="search" placeholder="输入关键词，例如 图书馆、清史、AI">
+      </label>
+    </div>
+  </header>
 
-<header>
-<h1>小历</h1>
-<p>历史研究者的夏日导航</p>
-<input id="searchInput" placeholder="搜索资源...">
-</header>
+  <main class="page-main">
+    <div class="results-bar">
+      <span id="resultCount">正在加载资源...</span>
+    </div>
+    <div id="categoryContainer"></div>
+  </main>
 
-<main></main>
+  <footer class="page-footer">
+    <p>© 2026 小卷</p>
+  </footer>
 
-<footer>
-© 2026 小历 · Summer Edition
-</footer>
-
-<script>
-
-const categories = [
-  {
-    title: "史学前沿",
-    links: [
-      {
-        name: "全国哲学社会科学工作办公室",
-        url: "http://www.nopss.gov.cn/GB/index.html"
-      },
-      {
-        name: "国家版本数据中心",
-        url: "https://pdc.capub.cn/"
-      },
-      {
-        name: "中国社会科学院哲学研究所",
-        url: "http://philosophy.cass.cn/tushudangan/zxxkfw/202305/t20230510_5637193.html"
-      }
-    ]
-  },
-  {
-    title: "论文投稿",
-    links: [
-      {
-        name: "万维书刊网",
-        url: "https://www.eshukan.com/?_d_id=2da568659942fcd3da09772d782e23"
-      },
-      {
-        name: "集刊全文数据库",
-        url: "https://www.jikan.com.cn/"
-      },
-      {
-        name: "中国近现代史专业期刊推荐",
-        url: "https://www.xueshuwenhai.com/zzList/sflzgjxds"
-      }
-    ]
-  },
-  {
-    title: "各大图书馆免费网上电子资源",
-    links: [
-      { name: "中国国家图书馆", url: "https://www.nlc.cn/web/index.shtml" },
-      { name: "广西壮族自治区图书馆", url: "https://www.gxlib.org.cn/" },
-      { name: "浙江图书馆", url: "https://www.zjlib.cn/" },
-      { name: "福建图书馆", url: "https://www.fjlib.net/#page2" },
-      { name: "河北图书馆", url: "http://www.helib.net/index.htm" },
-      { name: "贵州数字图书馆", url: "https://www.gzlib.org/" },
-      { name: "长春市图书馆", url: "https://ccelib.cn/" },
-      { name: "上海图书馆", url: "https://www.library.sh.cn/" },
-      { name: "高校与图书馆导航", url: "https://szsyw.cn/libs" },
-      { name: "山东省图书馆", url: "http://www.sdlib.com/?ref=https://szsyw.cn" },
-      { name: "湖北省图书馆（最好用）", url: "https://www.library.hb.cn/" },
-      { name: "日本国立公文书馆", url: "https://www.digital.archives.go.jp/" }
-    ]
-  },
-  {
-    title: "历史电子书找书",
-    links: [
-      { name: "全国图书馆参考咨询联盟", url: "http://www.ucdrs.superlib.net/" },
-      { name: "龙岩网络图书馆", url: "http://www.ly.superlib.net" },
-      { name: "读秀网址", url: "http://www.duxiu.com" },
-      { name: "找书网", url: "https://www.findbooks.eu.org/" },
-      { name: "识典古籍", url: "https://www.shidianguji.com/?page_from=home_page" },
-      { name: "书格", url: "https://www.shuge.org/" },
-      { name: "查即得", url: "https://www.chajide.com/" },
-      { name: "安娜的档案", url: "https://zh.annas-archive.org/" },
-      { name: "Zlibrary", url: "https://z-library.sk/" }
-    ]
-  },
-  {
-    title: "AI助手库",
-    links: [
-      { name: "元宝 (腾讯)", url: "https://yuanbao.tencent.com" },
-      { name: "DeepSeek (深度求索)", url: "https://www.deepseek.com" },
-      { name: "豆包 (字节跳动)", url: "https://www.doubao.com" },
-      { name: "通义千问 (阿里巴巴)", url: "https://tongyi.aliyun.com/qianwen" },
-      { name: "智谱清言 (智谱AI)", url: "https://chatglm.cn" },
-      { name: "Kimi Chat (月之暗面)", url: "https://kimi.moonshot.cn" },
-      { name: "Gemini (Google)", url: "https://gemini.google.com" },
-      { name: "ChatGPT (OpenAI)", url: "https://chat.openai.com" },
-      { name: "Grok (xAI/马斯克)", url: "https://grok.x.ai" },
-      { name: "GitHub (开发平台)", url: "https://github.com" }
-    ]
-  },
-  {
-    title: "工具箱子",
-    links: [
-      { name: "籍合网", url: "https://ancientbooks.cn/" },
-      { name: "PDFcraft", url: "https://pdfcraft-55m.pages.dev/zh/" },
-      {
-        name: "人名权威-人物传记资料库",
-        url: "https://newarchive.ihp.sinica.edu.tw/sncaccgi/sncacFtp?@@0.6242090490582928"
-      },
-      { name: "兩千年中西曆轉換", url: "https://sinocal.sinica.edu.tw/" },
-      { name: "经籍指掌", url: "https://bib.pkudh.org/statistic" },
-      {
-        name: "中国历代人物传记资料库",
-        url: "https://db1.ihp.sinica.edu.tw/cbdbc/ttsweb?@0:0:1:cbdbkm@@0.47946741292253137"
-      },
-      { name: "白云深处", url: "http://www.homeinmists.com/indexComputing.htm" },
-      { name: "知识图谱", url: "https://cnkgraph.com/Calendar" },
-      { name: "中华文史网", url: "http://www.historychina.net/" }
-    ]
-  },
-  {
-    title: "有用的导航网站",
-    links: [
-      { name: "效率集", url: "https://www.xiaolvji.com/u/ljyandlwl" },
-      { name: "烟海", url: "http://www.yanhainav.cn/" },
-      { name: "数字素养网", url: "https://szsyw.cn/" },
-      { name: "喜欢书签", url: "https://www.likebookmark.com/" },
-      { name: "古籍觅宝", url: "https://guji99.com/" }
-    ]
-  },
-  {
-    title: "清史专题",
-    links: [
-      { name: "档案馆馆藏检索系统", url: "https://archivesonline.mh.sinica.edu.tw/" },
-      { name: "清代档案检索系统", url: "https://qingarchives.npm.edu.tw/" },
-      { name: "中央研究院近代史研究所", url: "https://www.mh.sinica.edu.tw/Index.aspx" },
-      { name: "中华古籍智慧化服务平台", url: "https://guji.nlc.cn/" },
-      { name: "中国第一历史档案馆", url: "https://fhac.com.cn/index.html" },
-      { name: "中国历史研究院", url: "http://hrczh.cass.cn/bygl/zzjg/" },
-      { name: "抗日战争平台", url: "https://www.modernhistory.org.cn/#/" },
-      { name: "明清档案工作室", url: "https://newarchive.ihp.sinica.edu.tw/" },
-      { name: "国家哲学社会科学中心", url: "https://www.ncpssd.cn/" },
-      { name: "清季职官表查询", url: "http://ssop.digital.ntu.edu.tw/index.php" },
-      { name: "晚清民国文献平台", url: "https://lateqr.ancientbooks.cn/docWenxian/" }
-    ]
-  },
-  {
-    title: "轻松娱乐",
-    links: [
-      { name: "红白机游戏盒", url: "https://nes.heheda.cn/" },
-      { name: "小霸王游戏机", url: "https://www.yikm.net/" }
-    ]
-  },
-  {
-    title: "网盘资源",
-    links: [
-      { name: "懒盘资源", url: "https://www.lzpanx.com/" },
-      { name: "Dac导航", url: "https://dacdh.top/" },
-      { name: "盘搜pro", url: "https://panso.pro/" },
-      { name: "友沃可云盘", url: "https://pan.uvooc.com/" }
-    ]
-  }
-];
-
-function generateCategories(data){
-const main=document.querySelector("main");
-data.forEach(c=>{
-const s=document.createElement("section");
-s.className="category";
-s.innerHTML=`<h2>${c.title}</h2>`;
-const ul=document.createElement("ul");
-ul.className="link-list";
-c.links.forEach(l=>{
-ul.innerHTML+=`<li><a target="_blank" href="${l.url}">${l.name}</a></li>`;
-});
-s.appendChild(ul);
-main.appendChild(s);
-});
-}
-
-function debounce(fn,t){
-let timer;
-return(...a)=>{
-clearTimeout(timer);
-timer=setTimeout(()=>fn(...a),t);
-}
-}
-
-function search(){
-const k=searchInput.value.toLowerCase();
-document.querySelectorAll(".category").forEach(cat=>{
-let show=false;
-cat.querySelectorAll("li").forEach(li=>{
-const hit=li.innerText.toLowerCase().includes(k);
-li.classList.toggle("hidden",!hit);
-if(hit)show=true;
-});
-cat.classList.toggle("hidden",!show);
-});
-}
-
-generateCategories(categories);
-searchInput.addEventListener("input",debounce(search,200));
-
-</script>
-
+  <script src="./script.js"></script>
 </body>
 </html>
